@@ -17,7 +17,9 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->post('announcement/create', 'AnnouncementController@create');
-$router->get('announcement/{id}', 'AnnouncementController@find');
-$router->post('announcement/update', 'AnnouncementController@update');
-$router->get('announcements', 'AnnouncementController@all');
+$router->group(['prefix' => 'api'], function () use ($router) {
+    $router->post('announcement/create', 'AnnouncementController@create' );
+    $router->get('announcement/{id}', 'AnnouncementController@find');
+    $router->post('announcement/update', 'AnnouncementController@update');
+    $router->get('announcements', 'AnnouncementController@all');
+});
