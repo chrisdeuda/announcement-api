@@ -49,6 +49,7 @@ class AnnouncementController extends Controller
 
     /**
      * @param Request $request
+     * @TODO Implements pagination 
      * @return JsonResponse
      */
     public function all(Request $request): JsonResponse
