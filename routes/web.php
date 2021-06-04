@@ -16,3 +16,6 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+$router->post('announcement/create', 'AnnouncementController@create');
+$router->get('announcements', 'AnnouncementController@all');
