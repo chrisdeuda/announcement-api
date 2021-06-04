@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use App\Exceptions\HttpExceptions\UnprocessibleEntityException;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Validation\ValidationException;
@@ -49,6 +50,11 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
+        if ($exception instanceof UnprocessibleEntityException) {
+            return response()->json([
+                'error' => $exception->getMessage()
+            ], $e->getCode());
+        }
         return parent::render($request, $exception);
     }
 }
