@@ -46,6 +46,53 @@ class AnnouncementService
             'Announcements' => Announcement::all()
         ];
 
+    }
+
+    /**
+     * @param int $id
+     * @return array
+     */
+    public function find(int $id): array
+    {
+        $announcement = Announcement::find($id);
+
+        if(!$announcement) {
+            return [
+                'message' => "Unable to find the Announcement id ${id}"
+            ];
+
+        }
+        return [
+            'annoucement' => $announcement
+        ];
+    }
+
+
+    /**
+     * @param array $input
+     * @return string[]
+     */
+    public function update(array $input){
+
+        $id = $input['id'];
+        $announcement = Announcement::find($id);
+
+        if(!$announcement) {
+            return [
+                'message' => "Unable to find the Announcement id ${id}"
+            ];
+        }
+
+        $announcement->title = $input['title'];
+        $announcement->content = $input['content'];
+        $announcement->startDate = $input['startDate'];
+        $announcement->endDate = $input['endDate'];
+
+        if($announcement->save()){
+            return [
+                'message' => "Successfully update announcement ${id}"
+            ];
+        }
 
     }
 
