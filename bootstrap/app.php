@@ -22,7 +22,7 @@ date_default_timezone_set(env('APP_TIMEZONE', 'UTC'));
 $app = new Laravel\Lumen\Application(
     dirname(__DIR__)
 );
-
+$app->configure('cors');
  $app->withFacades();
 
  $app->withEloquent();
@@ -72,9 +72,10 @@ $app->configure('app');
 |
 */
 
-// $app->middleware([
-//     App\Http\Middleware\ExampleMiddleware::class
-// ]);
+ $app->middleware([
+   //  App\Http\Middleware\ExampleMiddleware::class
+    Fruitcake\Cors\HandleCors::class,
+ ]);
 
  $app->routeMiddleware([
      'auth' => App\Http\Middleware\Authenticate::class,
@@ -96,6 +97,8 @@ $app->configure('app');
 // $app->register(App\Providers\EventServiceProvider::class);
 $app->register(Tymon\JWTAuth\Providers\LumenServiceProvider::class);
 $app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
+$app->register(Fruitcake\Cors\CorsServiceProvider::class);
+
 
 /*
 |--------------------------------------------------------------------------
