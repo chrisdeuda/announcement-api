@@ -5,6 +5,7 @@ namespace App\Services;
 
 
 use App\Models\Announcement;
+use Illuminate\Support\Facades\Gate;
 
 
 class AnnouncementService
@@ -81,6 +82,10 @@ class AnnouncementService
             return [
                 'message' => "Unable to find the Announcement id ${id}"
             ];
+        }
+        // Check if the current login user have capability to update
+        if (! Gate::authorize('update', $announcement)) {
+            return false;
         }
 
         $announcement->title = $input['title'];
