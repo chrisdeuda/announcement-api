@@ -39,12 +39,14 @@ class AnnouncementService
     }
 
     /**
-     *
+     * @return array
      */
     public function all()
     {
+        $announcement =  Announcement::all()->sortByDesc("startDate");;
+
         return [
-            'Announcements' => Announcement::all()
+            'announcements' => $announcement
         ];
 
     }
