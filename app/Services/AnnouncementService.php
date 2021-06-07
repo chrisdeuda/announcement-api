@@ -6,12 +6,18 @@ namespace App\Services;
 
 use App\Models\Announcement;
 use Illuminate\Support\Facades\Gate;
+use App\Helper\Transformer\AnnouncementTransformer;
 
 
-class AnnouncementService
+class AnnouncementServicess
 {
+    /**
+     * @var AnnouncementTransformer
+     */
+    protected $announcementTransformer;
 
-    public function __construct(){
+    public function __construct(AnnouncementTransformer $announcementTransformer){
+        $this->announcementTransformer = $announcementTransformer;
 
     }
 
@@ -43,10 +49,10 @@ class AnnouncementService
      */
     public function all()
     {
-        $announcement =  Announcement::all()->sortByDesc("startDate");;
+        $announcements =  Announcement::all()->sortByDesc("startDate");;
 
         return [
-            'announcements' => $announcement
+            'announcements' => $this->announcementTransformer->transformCollection($announcements->toArray())
         ];
 
     }
@@ -66,8 +72,40 @@ class AnnouncementService
 
         }
         return [
-            'annoucement' => $announcement
+            'announcement' => $this->announcementTransformer->transform($announcement->toArray())
         ];
+    }
+
+
+
+
+    /**
+     * @param int $id
+     * @return array
+     */
+    public function delete(int $id): array
+    {
+        $announcement = Announcement::find($id);
+
+        if(!$announcement) {
+            return [
+                'status' => 0,
+                'message' => "Unable to find the Announcement id ${id}"
+            ];
+        }
+        $response = $announcement->destroy($id);
+        if ($response) {
+            return [
+                'status' => 1,
+                'message' => 'success'
+            ];
+        } else {
+            return [
+                'status' => 0,
+                'message' => 'fail'
+            ];
+        }
+
     }
 
 
@@ -94,6 +132,7 @@ class AnnouncementService
         $announcement->content = $input['content'];
         $announcement->startDate = $input['startDate'];
         $announcement->endDate = $input['endDate'];
+        $announcement->active = $input['active'];
 
         if($announcement->save()){
             return [
