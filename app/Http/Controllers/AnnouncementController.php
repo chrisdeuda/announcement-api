@@ -49,7 +49,7 @@ class AnnouncementController extends ApiController
             return $this->respondWithError("Unable to create announcement");
         }
 
-        return $this->respondCreated("Announcement successfully created");
+        return $this->respondWithMessage("Announcement successfully created");
 
     }
 
@@ -66,7 +66,7 @@ class AnnouncementController extends ApiController
 
         if(!$announcements) {
 
-            return $this->responseNotFound("");
+            return $this->responseNotFound("No Announcement found");
 
         }
         $data = $this->announcementTransformer->transformCollection($announcements->toArray());
@@ -129,8 +129,7 @@ class AnnouncementController extends ApiController
             return $this->respondWithError("Unable to saved existing announcement ${id}");
         }
 
-        $this->respondCreated("Announcement successfully updated");
-        $this->respondCreated("Announcement successfully updated");
+        return $this->respondWithMessage("Announcement successfully updated");
 
     }
 
