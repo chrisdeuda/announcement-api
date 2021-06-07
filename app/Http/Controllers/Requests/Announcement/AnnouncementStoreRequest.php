@@ -14,8 +14,8 @@ class AnnouncementStoreRequest extends Controller
             $request, [
                 'title' => 'bail|required|max:255',
                 'content' => 'required',
-                'startDate' => 'required',
-                'endDate' => 'required',
+                'startDate' => 'required|date|before_or_equal:endDate',
+                'endDate' => 'required|date|after_or_equal:startDate',
                 'active' => 'required',
             ]
         );
