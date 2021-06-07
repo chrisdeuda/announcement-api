@@ -55,6 +55,12 @@ $router->group(
     $router->post('announcement/', 'AnnouncementController@find');
     $router->post('announcement/update', 'AnnouncementController@update');
     $router->post('announcement/delete', 'AnnouncementController@delete');
-    $router->get('announcements', 'AnnouncementController@index');
 
+
+});
+
+$router->group(['prefix' => 'api', ],
+    function () use ($router) {
+
+    $router->get('announcements', 'AnnouncementController@index');
 });
