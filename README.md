@@ -8,6 +8,7 @@
 * Mbstring PHP Extension
 * MySQL
 * Composer
+* Clone of `announcement-client`
 
 ## Installation
 
