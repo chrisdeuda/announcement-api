@@ -19,7 +19,7 @@ class AuthController extends Controller
      * @return void
      */
     public function __construct() {
-        $this->middleware('jwt-auth', ['except' => ['login', 'register']]);
+        $this->middleware('auth', ['except' => ['login', 'register']]);
     }
 
     /**

@@ -43,13 +43,18 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 $router->group(
     [
         'prefix' => 'api',
-        'middleware' => 'auth:api',
+        //'middleware' => 'auth:api',
+        'middleware' => 'auth',
     ],
     function () use ($router) {
 
-    $router->post('announcement/create', 'AnnouncementController@create' );
-    $router->get('announcement/{id}', 'AnnouncementController@find');
+    $router->post('announcement/create',
+        ['as' => 'announcement_create',
+            'uses' => 'AnnouncementController@store'
+        ]);
+    $router->post('announcement/', 'AnnouncementController@find');
     $router->post('announcement/update', 'AnnouncementController@update');
-    $router->get('announcements', 'AnnouncementController@all');
+    $router->post('announcement/delete', 'AnnouncementController@delete');
+    $router->get('announcements', 'AnnouncementController@index');
 
 });
