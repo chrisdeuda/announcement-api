@@ -34,8 +34,8 @@ php artisan migrate
 ```
 5. Insert Sample test admin user by:
     1. Go to folder `sql`.
-    2. There should be file sample-user.sql 
-    3. Import the query in your MySQl Editor
+    2. There should be file `sample-user.sql` 
+    3. Import the query in your MySQL Editor
     
 
 ## Running the lumen application
@@ -45,6 +45,6 @@ php -S localhost:8000 -t public
 ```
 
 ## Running Unit Test/ Testing
-**No Unit Test** I was get stuck with disabling middleware when writing test and don't have enough time.
+**No Unit Test** I was get stuck with disabling middleware when writing test and no more time on my end.
 
 ```
