@@ -32,28 +32,17 @@ DB_PASSWORD=your-password`
 ```
 php artisan migrate
 ```
+5. Insert Sample test admin user by:
+    1. Go to folder `sql`.
+    2. There should be file sample-user.sql 
+    3. Import the query in your MySQl Editor
+    
 
 ## Running the lumen application
 Run this command to run the lumen application:
 ```
 php -S localhost:8000 -t public
 ```
-
-## Running Customers import using terminal to import data from https://randomuser.me/api
-1. Make sure that your PHP and Mysql are running.
-1. Open your Terminal or CMD
-2. To import customers data run:
-```
-    php artisan customer:import
-```
-_It should now import all of the data_
-
-## Available endpoints
-`localhost:8000` -  BASE URL FOR endpoints
-
-`GET` `/customers`  - List of all customers
-
-`GET` `/customers/{id}` - Search for specific customer
 
 ## Running Unit Test/ Testing
 **No Unit Test** I was get stuck with disabling middleware when writing test and don't have enough time.
